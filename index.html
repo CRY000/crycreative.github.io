@@ -256,65 +256,261 @@ nav.scrolled {
     .hero-side.left  { left: 3.5rem; }
     .hero-side.right { right: 3.5rem; text-align: right; }
 
+   
+
     /* Tagline for mobile */
 
  /* ===== MOBILE ===== */
-@media (max-width: 768px) { 
-  .photo-placeholder img {
-    width: 600px !important;
-    height: auto;
-  }
-}
+/* ═══════════════════════════════
+   BENTO MOBILE — oculto en desktop
+═══════════════════════════════ */
+.bento-grid,
+.bento-bottom { display: none; }
 
+.hero-tagline-mobile { display: none; }
 
+/* ═══════════════════════════════
+   HERO MOBILE — BENTO GRID
+   max-width: 768px
+═══════════════════════════════ */
 @media (max-width: 768px) {
-  .hero-name {
-  position: absolute;
-  top: 20px;        /* 👈 MOVER ARRIBA / ABAJO */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
 
-  font-size: clamp(2.5rem, 12vw, 6rem); /* 👈 TAMAÑO */
-  line-height: .9;
+  /* ── Ocultar elementos desktop ── */
+  .hero-side,
+  .hero-photo-wrap,
+  .hero-name,
+  .hero-bottom,
+  .hero-tagline-mobile  { display: none !important; }
+
+  /* ── Contenedor hero ── */
+  #hero {
+    min-height: 100svh;
+    display: block;
+    padding: 0 14px 22px;
+    background:
+      radial-gradient(ellipse 120% 50% at 75% -5%, #b8cfff 0%, transparent 55%),
+      radial-gradient(ellipse 70% 40% at 5% 85%, #d0e2ff 0%, transparent 50%),
+      var(--off-white);
+    overflow: hidden;
+  }
+
+  /* ── Nav ── */
+  .nav-links  { display: none; }
+  .nav-burger {
+    display: flex;
+    position: absolute;
+    top: 18px; right: 14px;
+  }
+  .nav-logo {
+    top: 18px; left: 14px;
+  }
+  .nav-logo img { height: 48px; }
+
+  /* ══ BENTO GRID ══ */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 86px;
+    position: relative;
+    z-index: 5;
+  }
+
+  /* Base card glass */
+  .bc {
+    background: rgba(255, 255, 255, .48);
+    border: 1.5px solid rgba(255, 255, 255, .88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 22px;
+    padding: 18px;
+    overflow: hidden;
+    position: relative;
+    animation: bentoUp .7s both ease;
+  }
+  .bc.span2    { grid-column: span 2; }
+  .bc.blue-fill {
+    background: rgba(37, 99, 255, .85);
+    border-color: rgba(37, 99, 255, .4);
+  }
+  .bc.dark-fill {
+    background: rgba(15, 31, 110, .88);
+    border-color: rgba(15, 31, 110, .35);
+  }
+
+  @keyframes bentoUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .bc:nth-child(1) { animation-delay: .05s; }
+  .bc:nth-child(2) { animation-delay: .12s; }
+  .bc:nth-child(3) { animation-delay: .18s; }
+  .bc:nth-child(4) { animation-delay: .24s; }
+  .bc:nth-child(5) { animation-delay: .30s; }
+  .bc:nth-child(6) { animation-delay: .36s; }
+  .bc:nth-child(7) { animation-delay: .42s; }
+
+  /* ── Labels ── */
+  .bc-label {
+    display: block;
+    font-size: 9.5px; letter-spacing: .1em; font-weight: 600;
+    color: #5570b0; text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'Syne', sans-serif;
+  }
+  .bc-label.w { color: rgba(255, 255, 255, .6); }
+
+  /* ── Card 1: Nombre ── */
+  .bc-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px; line-height: .85;
+    color: #0f1f6e; letter-spacing: -.01em;
+  }
+  .bc-name .acc { color: var(--blue); }
+  .bc-name-sub {
+    font-size: 10px; color: #5570b0;
+    letter-spacing: .08em; margin-top: 8px;
+    font-family: 'Syne', sans-serif;
+  }
+  .bc-deco {
+    position: absolute; right: -10px; bottom: -18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px; color: rgba(37, 99, 255, .06);
+    line-height: 1; pointer-events: none; user-select: none;
+  }
+
+  /* ── Card 2: Status ── */
+  .bc-status-row {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+  }
+  .bc-sdot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #3cdc78;
+    box-shadow: 0 0 0 3px rgba(60, 220, 120, .22);
+    animation: sdotPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes sdotPulse {
+    0%,100% { box-shadow: 0 0 0 3px rgba(60, 220, 120, .22); }
+    50%     { box-shadow: 0 0 0 6px rgba(60, 220, 120, .07); }
+  }
+  .bc-status-txt {
+    font-size: 9.5px; color: #1a3aaa;
+    letter-spacing: .07em; font-weight: 600;
+    font-family: 'Syne', sans-serif;
+  }
+  .bc-avail {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; color: #0f1f6e; line-height: 1;
+  }
+  .bc-avail-sub {
+    font-size: 9px; color: #5570b0;
+    letter-spacing: .06em; margin-top: 3px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── Card 3: Servicios ── */
+  .bc-svc-list {
+    list-style: none; display: flex;
+    flex-direction: column; gap: 7px; margin-top: 2px;
+  }
+  .bc-svc-list li {
+    font-size: 11px; color: #fff; font-weight: 400;
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Syne', sans-serif;
+  }
+  .bc-svc-list li::before {
+    content: ''; width: 4px; height: 4px;
+    border-radius: 50%; background: rgba(255,255,255,.7); flex-shrink: 0;
+  }
+
+  /* ── Card 4: Quote ── */
+  .bc-quote-mark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px; color: rgba(255,255,255,.12);
+    line-height: .7; display: block; margin-bottom: -4px;
+  }
+  .bc-quote {
+    font-size: 13px; color: #fff;
+    line-height: 1.55; font-weight: 300;
+    margin-top: 6px; font-family: 'Syne', sans-serif;
+  }
+
+  /* ── Card 5: Año ── */
+  .bc-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; color: var(--blue); line-height: 1;
+  }
+  .bc-year-sub {
+    font-size: 9px; color: #5570b0;
+    letter-spacing: .07em; margin-top: 2px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── Card 6: Stats ── */
+  .bc-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .bc-stat { text-align: center; padding: 4px 0; }
+  .bc-stat:not(:last-child) { border-right: 1px solid rgba(37,99,255,.12); }
+  .bc-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px; color: var(--blue); line-height: 1;
+  }
+  .bc-stat-lbl {
+    font-size: 9px; color: #5570b0;
+    letter-spacing: .06em; margin-top: 3px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── Card 7: CTA ── */
+  .bc-cta-row {
+    display: flex; align-items: center;
+    justify-content: space-between;
+  }
+  .bc-cta-txt {
+    font-size: 13px; color: #0f1f6e;
+    font-weight: 600; line-height: 1.3;
+    font-family: 'Syne', sans-serif;
+  }
+  .bc-cta-btn {
+    background: var(--blue); color: #fff;
+    border: none; border-radius: 100px;
+    padding: 9px 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .06em; cursor: pointer;
+    white-space: nowrap; flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ── Bento bottom bar ── */
+  .bento-bottom {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-top: 12px;
+    padding: 0 4px; position: relative; z-index: 5;
+  }
+  .bento-copy {
+    font-size: 9px; color: #8090c0; letter-spacing: .07em;
+    font-family: 'Syne', sans-serif;
+  }
+  .bento-scroll {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 9px; color: #8090c0; letter-spacing: .1em;
+    font-family: 'Syne', sans-serif;
+    animation: bentoScroll 2.5s ease-in-out infinite;
+  }
+  .bento-scroll-bar {
+    width: 1px; height: 20px;
+    background: linear-gradient(180deg, var(--blue), transparent);
+    opacity: .6;
+  }
+  @keyframes bentoScroll {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(5px); }
+  }
+
 }
-}
-
-
-.hero-tagline-mobile {
-  display: none;
-  font-size: 1.2rem;
-  color: var(--gray);
-  line-height: 1.6;
-  font-weight: 300;
-  margin-bottom: 1.4rem;
-  position: relative;
-  z-index: 2;
-}
-
-    .hero-bottom {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      position: relative; z-index: 4;
-    }
-    .hero-copy {
-      font-size: .65rem; color: var(--gray);
-      letter-spacing: .08em; font-family: 'Syne', sans-serif;
-    }
-    .scroll-hint {
-      font-size: .65rem; color: var(--gray); letter-spacing: .1em;
-      font-family: 'Syne', sans-serif;
-      display: flex; align-items: center; gap: .4rem;
-      animation: bounce 2s ease-in-out infinite;
-    }
-    .scroll-hint::before {
-      content: ''; display: block; width: 1px; height: 24px;
-      background: var(--blue); opacity: .5;
-    }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(6px); }
-    }
-
     /* ═══ ABOUT ═══ */
     #about {
       padding: 7rem 3.5rem;
@@ -617,7 +813,6 @@ nav.scrolled {
   <a href="#contact">Contact</a>
   <span class="mobile-menu-copy">© Dave Prasca 2026</span>
 </div>
-
 <!-- HERO -->
 <section id="hero">
   <div class="blob blob-1"></div>
@@ -640,16 +835,92 @@ nav.scrolled {
   </div>
 
   <div class="hero-photo-wrap">
-  <div class="photo-placeholder">
-    <img src="img/preview (3).png" alt="Mi foto">
+    <div class="photo-placeholder">
+      <img src="img/preview (3).png" alt="Mi foto">
+    </div>
   </div>
-</div>
-
 
   <div class="hero-bottom">
     <span class="hero-copy">© Dave Prasca 2026</span>
     <span class="scroll-hint">Scroll</span>
   </div>
+
+  <!-- ═══ BENTO MOBILE ═══ -->
+  <div class="bento-grid">
+
+    <div class="bc span2" style="padding:20px 20px 16px;">
+      <span class="bc-label">Creative director</span>
+      <div class="bc-name">DAVE<br>PRAS<span class="acc">C</span>A</div>
+      <div class="bc-deco">DP</div>
+      <p class="bc-name-sub">Medellín · Colombia · 2026</p>
+    </div>
+
+    <div class="bc">
+      <div class="bc-status-row">
+        <div class="bc-sdot"></div>
+        <span class="bc-status-txt">OPEN</span>
+      </div>
+      <div class="bc-avail">AVAIL-<br>ABLE</div>
+      <div class="bc-avail-sub">For projects</div>
+    </div>
+
+    <div class="bc blue-fill">
+      <span class="bc-label w">Servicios</span>
+      <ul class="bc-svc-list">
+        <li>Video editing</li>
+        <li>Colorización</li>
+        <li>Fotografía</li>
+        <li>Motion design</li>
+      </ul>
+    </div>
+
+    <div class="bc dark-fill span2">
+      <span class="bc-quote-mark">"</span>
+      <p class="bc-quote">Transformo ideas en visuales que conectan, emocionan y dejan huella.</p>
+    </div>
+
+    <div class="bc">
+      <span class="bc-label">Desde</span>
+      <div class="bc-year">2020</div>
+      <div class="bc-year-sub">Trabajando</div>
+    </div>
+
+    <div class="bc" style="display:flex;flex-direction:column;justify-content:center;">
+      <div class="bc-stats">
+        <div class="bc-stat">
+          <div class="bc-stat-num">50+</div>
+          <div class="bc-stat-lbl">Proyectos</div>
+        </div>
+        <div class="bc-stat">
+          <div class="bc-stat-num">12+</div>
+          <div class="bc-stat-lbl">Clientes</div>
+        </div>
+        <div class="bc-stat">
+          <div class="bc-stat-num">5★</div>
+          <div class="bc-stat-lbl">Rating</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bc span2" style="padding:16px 18px;">
+      <div class="bc-cta-row">
+        <div class="bc-cta-txt">¿Listo para<br>trabajar juntos?</div>
+        <button class="bc-cta-btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+          Contáctame →
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bento-bottom">
+    <span class="bento-copy">© Dave Prasca 2026</span>
+    <div class="bento-scroll">
+      <div class="bento-scroll-bar"></div>
+      Scroll
+    </div>
+  </div>
+
 </section>
 
 <!-- ABOUT -->
